@@ -2,17 +2,13 @@
 require '../classes/TaskOne.php';
 
 try {
-    // Database instantiate & connect
-    $database = new DB();
+    $database = new DB(); # Database instantiate & connect
     $db = $database->connect();
 
-    // instantiate TaskOne object
-    $task_one = new TaskOne($db);
+    $task_one = new TaskOne($db); # instantiate TaskOne object
 
-    // query of category join category_relations PDO statement
-    $result = $task_one->read();
 
-    // make empty array
+    $result = $task_one->read(); # query of category join category_relations PDO statement
     $task_one_arr = array();
 
     while($row = $result->fetch(PDO::FETCH_ASSOC)) {
@@ -25,11 +21,19 @@ try {
         // push to 'data'
         $task_one_arr[] = $task_one_item;
     }
-    // make table name, num_items
-    $tree = $task_one->buildTree($task_one_arr);
-    // make table
-    $task_one->makeTable($tree);
+    $tree = $task_one->buildTree($task_one_arr); # make table name, num_items
+   $task_one_tree = $task_one->makeTable($tree); # make table
 
 } catch (Exception $e) {
-    echo $e->getMessage();
+     $task_one_tree = $e->getMessage();
 }
+$page_title ="Task One"
+?>
+<?php include_once '../views/layout/header.php';?>
+    <div class="main">
+        <a href="../index.php"><i class="bx bx-home"></i></a>
+        <h1>Task 1</h1>
+        <hr>
+        <?php echo  $task_one_tree; ?>
+    </div>
+<?php include_once '../views/layout/footer.php';?>

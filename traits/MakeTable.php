@@ -3,10 +3,10 @@ trait MakeTable
 {
     /**
      * @param array $tree
-     * @return void
+     * @return string
      */
-    public function makeTable(array $tree = []): void
-    {
+    public function makeTable(array $tree = []): string
+         {
          $table_html = '<table border="1" style="border-collapse: collapse; width: 100%;">';
          $table_html .=  '<tr>';
          $table_html .=  '<th>Category Name</th>';
@@ -19,6 +19,6 @@ trait MakeTable
              $table_html .= '</tr>';
         }
         $table_html .= '</table>';
-        echo $table_html;
+        return $table_html;
     }
 }
